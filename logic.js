@@ -1,7 +1,7 @@
 //URL
 let url = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson'
 
- //call url
+ //Call URL
 d3.json(url).then(function (data) {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -10,35 +10,37 @@ d3.json(url).then(function (data) {
   });
 
 
-// set zoom
+// Set Zoom
 let mapCoords = [40.09, -105.71];
 let mapZoomLevel = 5;
 
-// Create map
+// Create Map
 function createMap(earthquakes){
-  // Create the base layers.
+ 
+ // Create the base layers.
   let street = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   });
 
-// create base map
-  // Set origin and zoom level
+// Create Base Map.
+
+ // Set origin + zoom level
 
   let baseMaps = {
     "Street Map": street
   };
-  // create overlay
+  // Make Overlay
   let overlayMaps = {
     "Earthquakes": earthquakes
   };
-  // create new map and edit the code to add to the layers
+  // Make new map and adjust the layers
   let myMap = L.map("map", {
     center: mapCoords,
     zoom: mapZoomLevel,
     layers: [street,earthquakes]
   });  
 
-// create legend
+// Create Legend for Map
 let legend = L.control({position: 'bottomright'});
 legend.onAdd = function (map) {
     let div = L.DomUtil.create('div', 'legend');
